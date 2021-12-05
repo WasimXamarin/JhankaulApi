@@ -12,6 +12,33 @@ bin-release/
 *.air
 *.ipa
 *.apk
+*.log
+*.db
+*.config
+*.suo
+
+#-- Others
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+#*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+.builds
+*.pidb
+*.vcxproj.filters
+*.bak
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important

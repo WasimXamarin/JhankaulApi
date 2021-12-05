@@ -42,7 +42,7 @@ namespace JhankaulAPI.RepositoriesMethod
 
         public async Task<IEnumerable<TblSignUpMobile>> GetSignUpMobiles()
         {
-            return await _JhankaulDbContext.TblSignUpMobiles.ToListAsync()_;
+            return await _JhankaulDbContext.TblSignUpMobiles.ToListAsync();
         }
 
         public async Task<IEnumerable<TblSignUpMobile>> SearchSignUpMobile(string MobileNumber)
