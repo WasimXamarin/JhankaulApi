@@ -16,6 +16,8 @@ bin-release/
 *.db
 *.config
 *.suo
+*.mfractor
+*.vs
 
 #-- Others
 *_i.c
