@@ -19,6 +19,7 @@ namespace JhankaulAPI.Models
 
         public virtual DbSet<TblAbout> TblAbouts { get; set; }
         public virtual DbSet<TblChiefGuest> TblChiefGuests { get; set; }
+        public virtual DbSet<TblHome> TblHomes { get; set; }
         public virtual DbSet<TblOrganizer> TblOrganizers { get; set; }
         public virtual DbSet<TblPrize> TblPrizes { get; set; }
         public virtual DbSet<TblSainik> TblSainiks { get; set; }
@@ -77,6 +78,15 @@ namespace JhankaulAPI.Models
                 entity.Property(e => e.Profession).HasMaxLength(50);
 
                 entity.Property(e => e.Year).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<TblHome>(entity =>
+            {
+                entity.ToTable("tblHome");
+
+                entity.Property(e => e.NumberOfFemale).HasMaxLength(10);
+
+                entity.Property(e => e.NumberOfMale).HasMaxLength(10);
             });
 
             modelBuilder.Entity<TblOrganizer>(entity =>
