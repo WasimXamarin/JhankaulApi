@@ -22,6 +22,7 @@ namespace JhankaulAPI.Models
         public virtual DbSet<TblHome> TblHomes { get; set; }
         public virtual DbSet<TblOrganizer> TblOrganizers { get; set; }
         public virtual DbSet<TblPrize> TblPrizes { get; set; }
+        public virtual DbSet<TblProfile> TblProfiles { get; set; }
         public virtual DbSet<TblSainik> TblSainiks { get; set; }
         public virtual DbSet<TblSchool> TblSchools { get; set; }
         public virtual DbSet<TblSignUp> TblSignUps { get; set; }
@@ -123,6 +124,53 @@ namespace JhankaulAPI.Models
                 entity.Property(e => e.PrizePosition).HasMaxLength(5);
 
                 entity.Property(e => e.Year).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<TblProfile>(entity =>
+            {
+                entity.ToTable("tblProfile");
+
+                entity.Property(e => e.Age).HasMaxLength(10);
+
+                entity.Property(e => e.Class).HasMaxLength(10);
+
+                entity.Property(e => e.DateOfBirth).HasMaxLength(50);
+
+                entity.Property(e => e.District).HasMaxLength(50);
+
+                entity.Property(e => e.FatherName).HasMaxLength(50);
+
+                entity.Property(e => e.FirstName).HasMaxLength(50);
+
+                entity.Property(e => e.Gender).HasMaxLength(10);
+
+                entity.Property(e => e.LastName).HasMaxLength(50);
+
+                entity.Property(e => e.MiddleName).HasMaxLength(50);
+
+                entity.Property(e => e.MobileNumberOne).HasMaxLength(20);
+
+                entity.Property(e => e.MobileNumberTwo).HasMaxLength(20);
+
+                entity.Property(e => e.MotherName).HasMaxLength(50);
+
+                entity.Property(e => e.Nationality).HasMaxLength(50);
+
+                entity.Property(e => e.OutOfNumber).HasMaxLength(10);
+
+                entity.Property(e => e.PositionInClass).HasMaxLength(10);
+
+                entity.Property(e => e.Post).HasMaxLength(50);
+
+                entity.Property(e => e.RollNumber).HasMaxLength(50);
+
+                entity.Property(e => e.StateName).HasMaxLength(50);
+
+                entity.Property(e => e.Thana).HasMaxLength(50);
+
+                entity.Property(e => e.TotalNumber).HasMaxLength(10);
+
+                entity.Property(e => e.Village).HasMaxLength(50);
             });
 
             modelBuilder.Entity<TblSainik>(entity =>
