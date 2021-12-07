@@ -18,6 +18,8 @@ bin-release/
 *.suo
 *.mfractor
 *.vs
+*.pubxml
+*.pubxml.user
 
 #-- Others
 *_i.c
