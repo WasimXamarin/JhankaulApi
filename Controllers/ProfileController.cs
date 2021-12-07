@@ -11,20 +11,20 @@ namespace JhankaulAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AboutController : ControllerBase
+    public class ProfileController : ControllerBase
     {
-        private readonly IAboutRepository _aboutRepository;
-        public AboutController(IAboutRepository aboutRepository)
+        private readonly IProfileRepository _profileRepository;
+        public ProfileController(IProfileRepository profileRepository)
         {
-            _aboutRepository = aboutRepository;
+            _profileRepository = profileRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAbouts()
+        public async Task<ActionResult> GetProfiles()
         {
             try
             {
-                return Ok(await _aboutRepository.GetAbouts());
+                return Ok(await _profileRepository.GetProfiles());
             }
             catch (Exception Ex)
             {
@@ -33,11 +33,11 @@ namespace JhankaulAPI.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<TblAbout>> GetAbout(int Id)
+        public async Task<ActionResult<TblProfile>> GetProfile(int Id)
         {
             try
             {
-                var result = await _aboutRepository.GetAbout(Id);
+                var result = await _profileRepository.GetProfile(Id);
                 if(result == null)
                 {
                     return NotFound();
@@ -49,20 +49,20 @@ namespace JhankaulAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error in Retriving Data from Database");
             }
         }
-
+        
         [HttpPost]
-        public async Task<ActionResult<TblAbout>> CreateAbout(TblAbout tblAbout)
+        public async Task<ActionResult<TblProfile>> CreateProfile(TblProfile tblProfile)
         {
             try
             {
-                if(tblAbout == null)
+                if(tblProfile == null)
                 {
                     return BadRequest();
                 }
                 else
                 {
-                    var AboutCreate = await _aboutRepository.AddAbout(tblAbout);
-                    return CreatedAtAction(nameof(AboutCreate), new { id = AboutCreate }, AboutCreate);
+                    var ProfileCreate = await _profileRepository.AddProfile(tblProfile);
+                    return CreatedAtAction(nameof(ProfileCreate), new { Id = ProfileCreate }, ProfileCreate);
                 }
             }
             catch (Exception Ex)
@@ -70,24 +70,23 @@ namespace JhankaulAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error in Retriving Data from Database");
             }
         }
-
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<TblAbout>> UpdateAbout(int Id, TblAbout tblAbout)
+        public async Task<ActionResult<TblProfile>> UpdateProfile(int Id, TblProfile tblProfile)
         {
             try
             {
-                if(Id != tblAbout.Id)
+                if(Id != tblProfile.Id)
                 {
                     return BadRequest("Id Mismatch");
                 }
-                var AboutUpdate = await _aboutRepository.GetAbout(Id);
-                if(AboutUpdate == null)
+                var ProfileUpdate = await _profileRepository.UpdateProfile(tblProfile);
+                if(ProfileUpdate == null)
                 {
-                    return NotFound($"About Id = {Id} not found");
+                    return NotFound($"Profile Id = {Id} not found");
                 }
                 else
                 {
-                    return await _aboutRepository.UpdateAbout(tblAbout);
+                    return await _profileRepository.UpdateProfile(tblProfile);
                 }
             }
             catch (Exception Ex)
@@ -95,20 +94,19 @@ namespace JhankaulAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error in Retriving Data from Database");
             }
         }
-
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<TblAbout>> DeleteAbout(int Id)
+        public async Task<ActionResult<TblProfile>> DeleteProfile(int Id)
         {
             try
             {
-                var AboutDelete = await _aboutRepository.GetAbout(Id);
-                if(AboutDelete == null)
+                var ProfileDelete = await _profileRepository.GetProfile(Id);
+                if(ProfileDelete == null)
                 {
-                    return NotFound($"About Id = {Id} not found");
+                    return NotFound($"Profile Id = {Id} not found");
                 }
                 else
                 {
-                    return await _aboutRepository.DeleteAbout(Id);
+                    return await _profileRepository.DeleteProfile(Id);
                 }
             }
             catch (Exception Ex)
@@ -116,13 +114,29 @@ namespace JhankaulAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error in Retriving Data from Database");
             }
         }
-
-        [HttpGet("{search}")]
-        public async Task<ActionResult<IEnumerable<TblAbout>>> SearcAbout(string name)
+        [HttpGet("{searchFirstName}")]
+        public async Task<ActionResult<TblProfile>> SearchProfileFirstName(string FirstName)
         {
             try
             {
-                var result = await _aboutRepository.SearchAbout(name);
+                var result = await _profileRepository.SearchProfileName(FirstName);
+                if(result.Any())
+                {
+                    return Ok(result);
+                }
+                return NotFound();
+            }
+            catch (Exception Ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error in Retriving Data from Database");
+            }
+        }
+        [HttpGet("{searchMobileNumber}")]
+        public async Task<ActionResult<TblProfile>> SearchProfileMobileNumber(string MobileNumber)
+        {
+            try
+            {
+                var result = await _profileRepository.SearchProfileMobileNumber(MobileNumber);
                 if (result.Any())
                 {
                     return Ok(result);

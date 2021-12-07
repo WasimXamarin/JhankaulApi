@@ -24,14 +24,16 @@ namespace JhankaulAPI
         {
             services.AddControllers();
             services.AddDbContext<JhankaulContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IChiefGuestRepository, ChiefGuestRepository>();
-            services.AddScoped<IOrganizerRepository, OrganizerRepository>();
-            services.AddScoped<ISignUpRepository, SignUpRepository>();
-            services.AddScoped<ISainikRepository, SainikRepository>();
             services.AddScoped<IAboutRepository, AboutRepository>();
-            services.AddScoped<ISchoolRepository, SchoolRepository>();
+            services.AddScoped<IChiefGuestRepository, ChiefGuestRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IOrganizerRepository, OrganizerRepository>();
             services.AddScoped<IPrizeRepository, PrizeRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
+            services.AddScoped<ISainikRepository, SainikRepository>();
+            services.AddScoped<ISchoolRepository, SchoolRepository>();
             services.AddScoped<ISignUpMobileRepository, SignUpMobileRepository>();
+            services.AddScoped<ISignUpRepository, SignUpRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
